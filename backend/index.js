@@ -14,12 +14,12 @@ app.use((req, res, next) => {
   next();
 });
 
-const corsOptions = {
-  origin: "http://localhost:5173",
-  credentials: true, // allows cookies/auth headers
-};
+// const corsOptions = {
+//   origin: "http://localhost:5173",
+//   credentials: true, // allows cookies/auth headers
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/books", bookRoutes);
