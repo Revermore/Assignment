@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
 const Featured = () => {
@@ -8,7 +8,9 @@ const Featured = () => {
   useEffect(() => {
     const fetchFeaturedBooks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/books/featured");
+        const res = await axios.get(
+          "https://assignment-rosy-eight.vercel.app/books/featured"
+        );
         console.log(res);
         setFeaturedBooks(res.data.slice(0, 7));
       } catch (err) {

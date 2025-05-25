@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; // if you're using toasts
@@ -9,7 +9,9 @@ const Home = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/books`);
+      const response = await fetch(
+        `https://assignment-rosy-eight.vercel.app/books`
+      );
       const data = await response.json();
 
       if (!response.ok) {

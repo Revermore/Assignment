@@ -28,7 +28,7 @@ function BookDetail() {
     const savedToken = localStorage.getItem("token");
     if (savedToken) setToken(savedToken);
 
-    fetch(`http://localhost:5000/books/${id}`)
+    fetch(`https://assignment-rosy-eight.vercel.app/books/${id}`)
       .then((res) => res.json())
       .then(setBook);
   }, [id]);
@@ -36,7 +36,9 @@ function BookDetail() {
   // Load Reviews with Pagination
   useEffect(() => {
     if (!id) return;
-    fetch(`http://localhost:5000/reviews?bookId=${id}&page=${page}`)
+    fetch(
+      `https://assignment-rosy-eight.vercel.app/reviews?bookId=${id}&page=${page}`
+    )
       .then((res) => res.json())
       .then((newReviews) => {
         if (newReviews.length === 0) {
@@ -58,19 +60,22 @@ function BookDetail() {
       alert("You gotta log in first, bitch!");
       return;
     }
-    const res = await fetch("http://localhost:5000/reviews", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        book: id,
-        rating: newReview.rating,
-        comment: newReview.comment,
-        user: user._id,
-      }),
-    });
+    const res = await fetch(
+      "https://assignment-rosy-eight.vercel.app/reviews",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          book: id,
+          rating: newReview.rating,
+          comment: newReview.comment,
+          user: user._id,
+        }),
+      }
+    );
     const data = await res.json();
     setReviews((prev) => [data, ...prev]);
     setNewReview({ rating: 5, comment: "" });
@@ -81,10 +86,13 @@ function BookDetail() {
       alert("You gotta log in first, bitch!");
       return;
     }
-    await fetch(`http://localhost:5000/reviews/${reviewId}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await fetch(
+      `https://assignment-rosy-eight.vercel.app/reviews/${reviewId}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     setReviews((prev) => prev.filter((r) => r._id !== reviewId));
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Form,
@@ -41,14 +41,17 @@ export default function Header({ onSearch }) {
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem("token"); // Assuming you're storing it here
-      const response = await fetch("http://localhost:5000/books", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(addBookForm),
-      });
+      const response = await fetch(
+        "https://assignment-rosy-eight.vercel.app/books",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(addBookForm),
+        }
+      );
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Failed to add book");
@@ -100,14 +103,17 @@ export default function Header({ onSearch }) {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: loginData.email,
-          password: loginData.password,
-        }),
-      });
+      const res = await fetch(
+        "https://assignment-rosy-eight.vercel.app/users/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: loginData.email,
+            password: loginData.password,
+          }),
+        }
+      );
 
       const data = await res.json();
       console.log("Login response:", data);
@@ -134,18 +140,21 @@ export default function Header({ onSearch }) {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: signupData.username,
-          email: signupData.email,
-          password: signupData.password,
-          role: signupData.role,
-        }),
-      });
+      const res = await fetch(
+        "https://assignment-rosy-eight.vercel.app/users/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: signupData.username,
+            email: signupData.email,
+            password: signupData.password,
+            role: signupData.role,
+          }),
+        }
+      );
 
       const data = await res.json();
 
@@ -195,7 +204,7 @@ export default function Header({ onSearch }) {
       params.append("limit", limit);
 
       const response = await fetch(
-        `http://localhost:5000/books?${params.toString()}`
+        `https://assignment-rosy-eight.vercel.app/books?${params.toString()}`
       );
       const data = await response.json();
 
