@@ -57,7 +57,7 @@ function BookDetail() {
 
   const handleReviewSubmit = async () => {
     if (!token) {
-      alert("You gotta log in first, bitch!");
+      alert("Please log-in or create an account to submit your reviews!");
       return;
     }
     const res = await fetch(
@@ -83,7 +83,7 @@ function BookDetail() {
 
   const deleteReview = async (reviewId) => {
     if (!token) {
-      alert("You gotta log in first, bitch!");
+      alert("Please log-in or create an account to delete reviews!");
       return;
     }
     await fetch(
